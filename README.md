@@ -1,6 +1,6 @@
 # Mini App Example
 
-Mã nguồn ví dụ cho Mini App sử dụng Vue Framework và VBot SDK
+Mã nguồn mẫu cho Mini App sử dụng Vue Framework và VBot SDK
 
 ## Cài đặt dependencies
 
