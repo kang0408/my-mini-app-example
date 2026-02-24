@@ -1,15 +1,15 @@
 <script setup>
-import { retrieveLaunchParams, notification, popup, on } from "@vbotma/sdk";
-import { setupTheme } from "./setupTheme";
-import { ref, onMounted, watch, onUnmounted } from "vue";
+import { retrieveLaunchParams, notification, popup, on } from '@vbotma/sdk';
+import { setupTheme } from './setupTheme';
+import { ref, onMounted, watch, onUnmounted } from 'vue';
 
-console.log(retrieveLaunchParams());
-const newTask = ref("");
+console.log(retrieveLaunchParams().vbWebAppPlatform);
+const newTask = ref('');
 const tasks = ref([]);
 const themeListener = ref(null);
 
 const addTask = () => {
-  if (newTask.value.trim() === "") return;
+  if (newTask.value.trim() === '') return;
 
   tasks.value.unshift({
     // Thêm vào đầu danh sách để dễ thấy
@@ -20,46 +20,46 @@ const addTask = () => {
 
   if (notification.isSupported()) {
     notification.send({
-      title: "Thành công",
-      message: "Đã thêm công việc mới!",
+      title: 'Thành công',
+      message: 'Đã thêm công việc mới!',
     });
   }
 
-  newTask.value = "";
+  newTask.value = '';
 };
 
 const removeTask = async (index) => {
   if (popup.isSupported()) {
     try {
       const button_id = await popup.show({
-        title: "Xác nhận",
-        message: "Bạn có chắc chắn muốn xoá task này không?",
+        title: 'Xác nhận',
+        message: 'Bạn có chắc chắn muốn xoá task này không?',
         buttons: [
-          { id: "confirm-btn", type: "destructive", text: "Xoá" },
-          { id: "cancel-btn", type: "cancel", text: "Huỷ" },
+          { id: 'confirm-btn', type: 'destructive', text: 'Xoá' },
+          { id: 'cancel-btn', type: 'cancel', text: 'Huỷ' },
         ],
       });
 
-      if (button_id == "confirm-btn") {
+      if (button_id == 'confirm-btn') {
         tasks.value.splice(index, 1);
         notification.send({
-          title: "Đã xoá",
-          message: "Task đã được loại bỏ",
+          title: 'Đã xoá',
+          message: 'Task đã được loại bỏ',
         });
       }
     } catch (error) {
-      console.error("Lỗi popup", error);
+      console.error('Lỗi popup', error);
     }
   }
 };
 
 onMounted(() => {
-  const savedTasks = localStorage.getItem("vue-todo-list");
+  const savedTasks = localStorage.getItem('vue-todo-list');
   if (savedTasks) {
     tasks.value = JSON.parse(savedTasks);
   }
 
-  themeListener.value = on("theme_changed", () => {
+  themeListener.value = on('theme_changed', () => {
     setupTheme();
   });
 });
@@ -67,7 +67,7 @@ onMounted(() => {
 watch(
   tasks,
   (newVal) => {
-    localStorage.setItem("vue-todo-list", JSON.stringify(newVal));
+    localStorage.setItem('vue-todo-list', JSON.stringify(newVal));
   },
   { deep: true },
 );
@@ -183,15 +183,14 @@ onUnmounted(() => {
   flex: 1;
   background: transparent;
   border: none;
-  padding: 12px 16px;
+  padding: 12px 0;
   color: var(--text-color);
   font-size: 1rem;
   outline: none;
 }
 
 .input-section button {
-  width: 48px;
-  height: 48px;
+  width: 45px;
   border-radius: 12px;
   background: var(--accent-color);
   border: none;
@@ -251,7 +250,7 @@ ul {
 }
 
 /* Custom Checkbox */
-input[type="checkbox"] {
+input[type='checkbox'] {
   width: 22px;
   height: 22px;
   accent-color: var(--accent-color);
