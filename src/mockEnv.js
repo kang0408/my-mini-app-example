@@ -7,10 +7,13 @@ const themeParams = {
   text_color: '#000',
 };
 
-mockVBotEnv({
-  launchParams: {
-    vbWebAppThemeParams: themeParams,
-    vbWebAppVersion: 9.2,
-    vbWebAppPlatform: 'web',
-  },
-});
+if (import.meta.env.DEV) {
+  console.log('Mock Enviroment');
+  mockVBotEnv({
+    launchParams: {
+      vbWebAppThemeParams: themeParams,
+      vbWebAppVersion: 9.2,
+      vbWebAppPlatform: 'web',
+    },
+  });
+}

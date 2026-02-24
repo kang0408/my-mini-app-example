@@ -4,7 +4,7 @@ import App from './App.vue';
 import { init, retrieveLaunchParams, setTargetOrigin } from '@vbotma/sdk';
 import { setupTheme } from './setupTheme';
 
-// import './mockEnv';
+import './mockEnv';
 
 const { vbWebAppPlatform } = retrieveLaunchParams();
 
